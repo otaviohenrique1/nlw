@@ -1,3 +1,4 @@
+import pytest
 import uuid
 from datetime import datetime, timedelta
 from .trips_repository import TripsRepository
@@ -8,6 +9,7 @@ db_connection_handler.connect()
 
 trip_id = str(uuid.uuid4())
 
+@pytest.mark.skip(reason="interacao com o banco")
 def test_create_trip():
     conn = db_connection_handler.get_connection()
     trips_repository = TripsRepository(conn)
@@ -21,8 +23,17 @@ def test_create_trip():
     }
     trips_repository.create_trip(trips_infos)
 
+
+@pytest.mark.skip(reason="interacao com o banco")
 def find_trip_by_id_test():
     conn = db_connection_handler.get_connection()
     trips_repository = TripsRepository(conn)
     trip = trips_repository.find_trip_by_id(trip_id)
+    print(trip)
 
+
+@pytest.mark.skip(reason="interacao com o banco")
+def update_trip_status_test():
+    conn = db_connection_handler.get_connection()
+    trips_repository = TripsRepository(conn)
+    trips_repository.update_trip_status(trip_id)
